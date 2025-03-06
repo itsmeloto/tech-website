@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gago - Voice Assistant Calendar</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/5.10.1/main.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <button class="menu-button" id="menuButton">
+                <i class="fas fa-ellipsis-v"></i>
+            </button>
+            <div class="title">Calendar Assistant</div>
+            <div class="view-toggle">
+                <button class="view-btn active" id="singleViewBtn">
+                    <i class="fas fa-calendar-day"></i>
+                </button>
+                <button class="view-btn" id="multiViewBtn">
+                    <i class="fas fa-calendar-alt"></i>
+                </button>
+            </div>
+        </header>
+        
+        <!-- Single day view -->
+        <div class="calendar-container single-view" id="singleView">
+            <div class="today-header">
+                <div class="today-date">
+                    <div class="today-day" id="todayDay">14</div>
+                    <div class="today-info">
+                        <div class="today-weekday" id="todayWeekday">Friday</div>
+                        <div class="today-month-year" id="todayMonthYear">March 2025</div>
+                    </div>
+                </div>
+                <div class="today-weather">
+                    <i class="fas fa-sun"></i>
+                    <span id="todayWeather">22°C</span>
+                </div>
+            </div>
+            <div class="today-time" id="todayClock">00:00:00</div>
+            <div class="today-schedule">
+                <h3>Today's Schedule</h3>
+                <div class="schedule-list" id="todaySchedule">
+                    <!-- Today's meetings will be populated here -->
+                </div>
+            </div>
+        </div>
+        
+        <!-- Multi day view (calendar) -->
+        <div class="calendar-container multi-view hidden" id="multiView">
+            <div id="calendar"></div>
+        </div>
+        
+        <div class="feedback-text" id="feedbackText"></div>
+    </div>
+
+    <div class="voice-assistant-container">
+        <button class="voice-button" id="voiceButton">
+            <i class="fas fa-microphone"></i>
+        </button>
+    </div>
+
+    <div class="sidebar" id="sidebar">
+        <div class="sidebar-title">Your Meetings</div>
+        <ul class="meeting-list" id="meetingList">
+            <!-- Meeting items will be populated dynamically -->
+        </ul>
+    </div>
+
+    <div class="overlay" id="overlay"></div>
+
+    <div class="modal" id="meetingModal">
+        <div class="modal-header">
+            <h3 class="modal-title" id="modalTitle">Add New Meeting</h3>
+            <button class="close-modal" id="closeModal">&times;</button>
+        </div>
+        <form id="meetingForm">
+            <input type="hidden" id="meetingId">
+            <div class="form-group">
+                <label for="meetingName">Meeting Name</label>
+                <input type="text" class="form-control" id="meetingName" required>
+            </div>
+            <div class="form-group">
+                <label for="meetingDate">Date</label>
+                <input type="date" class="form-control" id="meetingDate" required>
+            </div>
+            <div class="form-group">
+                <label for="startTime">Start Time</label>
+                <input type="time" class="form-control" id="startTime" required>
+            </div>
+            <div class="form-group">
+                <label for="endTime">End Time</label>
+                <input type="time" class="form-control" id="endTime" required>
+            </div>
+            <div class="form-group">
+                <label for="alarmTime">Reminder (minutes before)</label>
+                <select class="form-control" id="alarmTime">
+                    <option value="0">No reminder</option>
+                    <option value="5">5 minutes</option>
+                    <option value="10">10 minutes</option>
+                    <option value="15">15 minutes</option>
+                    <option value="30">30 minutes</option>
+                    <option value="60">1 hour</option>
+                </select>
+            </div>
+            <div class="form-buttons">
+                <button type="button" class="btn btn-secondary" id="cancelButton">Cancel</button>
+                <button type="submit" class="btn btn-primary">Save Meeting</button>
+            </div>
+        </form>
+    </div>
+
+    <div class="toast" id="toast">
+        <div class="toast-content">
+            <div class="toast-icon">
+                <i class="fas fa-check-circle"></i>
+            </div>
+            <div class="toast-message" id="toastMessage"></div>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/5.10.1/main.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
